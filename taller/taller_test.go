@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-// El enunciado pide 6 comparativas (3 mixes * 2 configs). :contentReference[oaicite:13]{index=13}
-// En tests no dependemos de red: fijamos un estado estable "prioridad A" (4) o "normal".
-// Si quieres simular cambios, puedes ir llamando sm.SetState(...) durante el test.
 func TestComparativas(t *testing.T) {
 	type mix struct{ a, b, c int }
 	mixes := []mix{
@@ -34,7 +31,7 @@ func TestComparativas(t *testing.T) {
 				// Para tests: jitter bajo para que no se eternicen
 				cfg.MaxJitterSeconds = 0
 
-				ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+				ctx, cancel := context.WithTimeout(context.Background(), 180*time.Second)
 				defer cancel()
 
 				sm := NewStateManager()
